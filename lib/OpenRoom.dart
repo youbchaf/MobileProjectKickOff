@@ -1,15 +1,31 @@
 import 'package:flutter/material.dart';
 
-import 'OpenRoom.dart';
-
-class Room extends StatefulWidget {
-  const Room({Key? key}) : super(key: key);
+class OpenRoom extends StatefulWidget {
+  const OpenRoom({Key? key}) : super(key: key);
 
   @override
-  State<Room> createState() => _RoomState();
+  State<OpenRoom> createState() => _OpenRoomState();
 }
 
-class _RoomState extends State<Room> {
+class _OpenRoomState extends State<OpenRoom> {
+  List<bool> _isChecked = [false, false, false, false, false];
+  List<bool> _isChecked2 = [
+    false,
+    false,
+    false,
+  ];
+  List<String> _teamA = [
+    'Ayoub Chafik',
+    'Ait all Mohamed',
+    'Ayoub Boukdir',
+    'Hamza Natoli',
+    'Sara Smlali'
+  ];
+  List<String> _teamB = [
+    'Ahmed Badia',
+    'Ait blla Mohamed',
+    'Samir Bomiz',
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +51,7 @@ class _RoomState extends State<Room> {
           children: [
             Container(
               width: double.infinity,
-              height: 350,
+              height: 200,
               decoration: BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage('assets/cover.png'),
@@ -68,7 +84,7 @@ class _RoomState extends State<Room> {
                           Row(
                             children: [
                               Icon(
-                                Icons.place,
+                                Icons.online_prediction,
                                 color: Colors.white,
                                 size: 30,
                               ),
@@ -253,34 +269,173 @@ class _RoomState extends State<Room> {
                   SizedBox(
                     height: 15,
                   ),
-                  InkWell(
-                    onTap: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => OpenRoom(),
-                        ),
-                      );
-                    },
-                    child: Container(
-                      width: double.infinity,
-                      height: 60,
-                      decoration: BoxDecoration(
-                          color: Colors.blue,
-                          borderRadius: BorderRadius.circular(20)),
-                      child: Center(
-                        child: Text(
-                          "OPEN ROOM",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w400),
-                        ),
+                  Container(
+                    width: double.infinity,
+                    height: 60,
+                    decoration: BoxDecoration(
+                        color: Colors.blue,
+                        borderRadius: BorderRadius.circular(20)),
+                    child: Center(
+                      child: Text(
+                        "BOOK A PITCH",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w400),
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 15,
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.group,
+                              color: Colors.grey[700],
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              "Team A",
+                              style: TextStyle(
+                                  color: Colors.grey[700],
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 18,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.grey[200],
+                          ),
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: 5,
+                            itemBuilder: (BuildContext context, int index) {
+                              return CheckboxListTile(
+                                value: _isChecked[index],
+                                title: Text(_teamA[index]),
+                                onChanged: (value) {
+                                  setState(() {
+                                    _isChecked[index] = value!;
+                                  });
+                                },
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.group,
+                              color: Colors.grey[700],
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              "Team B",
+                              style: TextStyle(
+                                  color: Colors.grey[700],
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 18,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.grey[200],
+                          ),
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: 3,
+                            itemBuilder: (BuildContext context, int index) {
+                              return CheckboxListTile(
+                                value: _isChecked2[index],
+                                title: Text(_teamB[index]),
+                                onChanged: (value) {
+                                  setState(() {
+                                    _isChecked[index] = value!;
+                                  });
+                                },
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: InkWell(
+                          onTap: () {},
+                          child: Container(
+                            width: 180,
+                            height: 60,
+                            decoration: BoxDecoration(
+                                color: Colors.green,
+                                borderRadius: BorderRadius.circular(20)),
+                            child: Center(
+                              child: Text(
+                                "ADD PLAYAER",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 15,
+                      ),
+                      Expanded(
+                        child: InkWell(
+                          onTap: () {},
+                          child: Container(
+                            width: 180,
+                            height: 60,
+                            decoration: BoxDecoration(
+                                color: Colors.red,
+                                borderRadius: BorderRadius.circular(20)),
+                            child: Center(
+                              child: Text(
+                                "DELETE PLAYAER",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
                 ],
               ),
             )
